@@ -1,17 +1,44 @@
-# Algorithm and data structures challenges (in Python)
+# Algorithms and data structures challenges (in Python)
 
 My sandbox and playground for algorithm implementation and CS challenges.
 
-Be aware that most of the code is not complete and might not even compile.
+Be aware that most of the code is not complete and might not even compile/run.
 
+>This repository contains only python implementation. If you are interested in 
+>Java implementation, head to my 
+>[algorithm-challenges-lab repository](https://github.com/jmetzz/algorithm-challenges-lab). 
 
-# Run the examples
+## Running the code
+
+I usually run the code inside Intellij IDEA. Thus, if you mark the 
+`src` directory as the `Root Source` it should work straightaway.
+However, if you are using another IDE, you might fiddle a bit with the path configuration. 
+
+Instead of fiddling with path, a better alternative is just run the example code 
+as a module from the command line:
+
+```bash
+# cd src
+$ python -m challenges.fundamentals.sorting.quick_sort  
+```
 
 If you are using VS Code, make sure to add the correct configuration.
 It is important the set the `PYTHONPATH` variable correctly in order to 
 get the `imports` working properly.
-Therefor, replace `/path/to/` part of the path with the correct path 
+
+To run as a script you can add the following lines before the imports of local modules:
+
+```python
+# Local application imports
+import sys
+print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/path/to/algorithms-challenges-lab-python/src', 
+                 '/path/to/algorithms-challenges-lab-python/resources'])
+```
+Remember to replace `/path/to/` part of the path with the correct path 
 where the code base is located.
+
+To debug inside the IDE, add a configuration:
 
 ```json
     "configurations": [
@@ -26,20 +53,10 @@ where the code base is located.
             "console": "integratedTerminal"
         }
     ]
-
-```
-
-Alternativelly, you can set the path inside the running script. For example:
-
-```python
-if __name__ == "__main__":
-    import sys; print('Python %s on %s' % (sys.version, sys.platform))
-    sys.path.extend(['/path/to/algorithms-challenges-lab'])
-    // ...
 ```
 
 
-# Divide and conquer algorithms and problems
+## Divide and conquer algorithms and problems
 
 | Algorithm  | Status |
 |---|---|
@@ -54,7 +71,7 @@ if __name__ == "__main__":
 | Closes pair ||
 | Fast power ||
 
-# Dynamic programming algorithms and problems
+## Dynamic programming algorithms and problems
 
 | Algorithm  | Status |
 |---|---|
@@ -72,7 +89,7 @@ if __name__ == "__main__":
 | Checker board path - dynamic          | done |
 | Matrix multiplication sequence        | done |
 | String edit distance                  | done |
-| String longest commom subsequence     | done |
+| String longest common subsequence     | done |
 | Longest common substring              |  |
 | Longest increasing subsequence        |  |
 | Graph - tree width ||
@@ -87,9 +104,9 @@ if __name__ == "__main__":
 # Unclassified yet
 
 - String compression (cracking the code 1.6)
-- Matrix rotarion (cracking the code 1.7)
+- Matrix rotation (cracking the code 1.7)
 - Zero Matrix (cracking the code 1.8)
 - String rotation (cracking the code 1.9)
-- Suffix array longest commmon prefix, longest repeated substring, KWIC - keyword in context
+- Suffix array longest common prefix, longest repeated substring, KWIC - keyword in context
 
 

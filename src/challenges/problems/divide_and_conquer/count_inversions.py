@@ -61,7 +61,13 @@ if __name__ == "__main__":
     assert expected == actual
     print("-----")
 
-    input_file = "resources/IntegerArray.txt"
+    import os
+    print(os.getcwd())
+    # This path depends on your working directory.
+    # When running from Intellij IDEA, this directory
+    # is automatically selected as the current location
+    # of this file. Thus, we need to adjust the path accordingly.
+    input_file = "../../../../resources/IntegerArray.txt"
     with open(input_file) as f:
         lines = f.readlines()
     data = np.fromstring("".join(lines), dtype=int, sep="\n")

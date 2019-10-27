@@ -3,22 +3,8 @@ import random
 from random import shuffle
 
 # Local application imports
-from insertion_sort import InsertionSort
-
-
-def swap(a, i, j):
-    """Swap two elements in a given array.
-
-    The operation is performed in place,
-    exchanging the elements in position i and j.
-
-    Args:
-        i: the index of the first element
-        j: the index of the second element
-    """
-    temp = a[j]
-    a[j] = a[i]
-    a[i] = temp
+from challenges.fundamentals.sorting import swap
+from challenges.fundamentals.sorting.insertion_sort import InsertionSort
 
 
 class QSortRec:
@@ -30,7 +16,7 @@ class QSortRec:
         Quicksort algorithm which sorts the array in place.
 
         Args:
-            elements: the subarray of elements to partition
+            elements: the sub-array of elements to partition
         """
         cls._qsort(elements, 0, len(elements) - 1)
 
@@ -42,9 +28,9 @@ class QSortRec:
         Quicksort algorithm which sorts the array in place.
 
         Args:
-            elements: the subarray of elements to partition
-            lo: the lower bounday index of the subarray
-            hi: the higher boundary index of the subarray
+            elements: the sub-array of elements to partition
+            lo: the lower boundary index of the sub-array
+            hi: the higher boundary index of the sub-array
         """
         n = hi - lo + 1
         if n <= 1:
@@ -64,9 +50,9 @@ class QSortRec:
         for all i in 0..n
 
         Args:
-            elements: the subarray of elements to partition
-            lo: the lower bounday index of the subarray
-            hi: the higher boundary index of the subarray
+            elements: the sub-array of elements to partition
+            lo: the lower boundary index of the sub-array
+            hi: the higher boundary index of the sub-array
         Returns:
             the pivot index
         """
@@ -96,9 +82,9 @@ class QSortRec2(QSortRec):
         for all i in 0..n
 
         Args:
-            elements: the subarray of elements to partition
-            lo: the lower bounday index of the subarray
-            hi: the higher boundary index of the subarray
+            elements: the sub-array of elements to partition
+            lo: the lower boundary index of the sub-array
+            hi: the higher boundary index of the sub-array
         Returns:
             the pivot index
         """
@@ -130,7 +116,7 @@ class QSortRecRandomized(QSortRec2):
         the elements are shuffled before performing the sorting.
 
         Args:
-            elements: the subarray of elements to partition
+            elements: the sub-array of elements to partition
         """
         shuffle(elements)
         cls._qsort(elements, 0, len(elements) - 1)
@@ -148,15 +134,15 @@ class QSortRecThreeWayPartition(QSortRec2):
 
         This implementation is an improvement on the two-way partitioning
         method for cases when the data contains many duplicate keys.
-        However, it uses many more exchanges than the stadard 2-way
-        partitioning method for the common case when the numver of
+        However, it uses many more exchanges than the standard 2-way
+        partitioning method for the common case when the number of
         duplicate keys in the array is not high.
 
         We keep a few 'pointers' to control the partitioning process:
             lo: lower boundary index
             hi: higher boundary index
             lt: less than pivot higher boundary
-            i: equals pivot higher bounday
+            i: equals pivot higher boundary
             gt: greater than pivot lower boundary
 
         Start:
@@ -181,9 +167,9 @@ class QSortRecThreeWayPartition(QSortRec2):
                          i
 
         Args:
-            elements: the subarray of elements to partition
-            lo: the lower bounday index of the subarray
-            hi: the higher boundary index of the subarray
+            elements: the sub-array of elements to partition
+            lo: the lower boundary index of the sub-array
+            hi: the higher boundary index of the sub-array
         Returns:
             the pivot index
 
@@ -216,7 +202,7 @@ class QSortRecThreeWayPartitionAlternative(QSortRec2):
         This is a different implementation of the 3-way partitioning method.
         The abstraction is partition the array such that:
 
-        The pivot is always the first element in the subarray.
+        The pivot is always the first element in the sub-array.
 
             [ pivot | <= pivot | > pivot |     unseen     ]
             lo                                           hi
@@ -233,9 +219,9 @@ class QSortRecThreeWayPartitionAlternative(QSortRec2):
         Such element is at the index lte - 1.
 
         Args:
-            elements: the subarray of elements to partition
-            lo: the lower bounday index of the subarray
-            hi: the higher boundary index of the subarray
+            elements: the sub-array of elements to partition
+            lo: the lower boundary index of the sub-array
+            hi: the higher boundary index of the sub-array
         Returns:
             the pivot index
         """
@@ -253,10 +239,10 @@ class QSortRecThreeWayPartitionAlternative(QSortRec2):
 class QSortRecMedianOfThreePartition(QSortRec):
     @classmethod
     def choose_pivot(cls, elements, lo, hi):
-        """Chosse the pivot as a median of 3.
+        """Choose the pivot as a median of 3.
 
             This method randomly selects 3 elements
-            from the subarray as the pivot options.
+            from the sub-array as the pivot options.
             Then finds the median the element among
             the 3 chosen, and then swaps it with the
             element at index lo.
@@ -264,9 +250,9 @@ class QSortRecMedianOfThreePartition(QSortRec):
             for partitioning and sorting.
 
         Args:
-            elements: the subarray of elements to partition
-            lo: the lower bounday index of the subarray
-            hi: the higher boundary index of the subarray
+            elements: the sub-array of elements to partition
+            lo: the lower boundary index of the sub-array
+            hi: the higher boundary index of the sub-array
         Returns:
             pivot: the pivot value, which is the value at index lo
             pivot index: always return lo
@@ -303,45 +289,44 @@ class QSortRecRandomizedCutoff(QSortRecRandomized):
 
 class QSortRecRandomPivot(QSortRec):
     @classmethod
-    def _partition(cls, a, start, end):
+    def _partition(cls, elements, start, end):
         raise NotImplementedError("This method is not implemented yet.")
 
         pivot = random.randint(0, len(a) - 1)
-        swap(a, start, pivot)
+        swap(elements, start, pivot)
         i = start + 1
         for j in range(i, end + 1):
-            if a[j] < a[start]:
-                swap(a, i, j)
+            if elements[j] < elements[start]:
+                swap(elements, i, j)
                 i += 1
-        swap(a, start, i - 1)
+        swap(elements, start, i - 1)
         return i - 1
 
 
 if __name__ == "__main__":
+    a = [2, 4, 1, 8, 5, 0, ]
+    QSortRec.sort(a)
+    print(a)
 
-    # a =[2,4,1,8,5,0,]
-    # QSortRec.sort(a)
-    # print(a)
+    a = [2, 4, 1, 8, 5, 0, ]
+    QSortRec2.sort(a)
+    print(a)
 
-    # a =[2,4,1,8,5,0,]
-    # QSortRec2.sort(a)
-    # print(a)
+    a = [2, 4, 1, 8, 5, 0, ]
+    QSortRecRandomized.sort(a)
+    print(a)
 
-    # a =[2,4,1,8,5,0,]
-    # QSortRecRandomized.sort(a)
-    # print(a)
+    a = [2, 4, 1, 8, 5, 0, 3, 4, 5, 6, 7, 2, 1, 6]
+    QSortRecThreeWayPartition.sort(a)
+    print(a)
 
-    # a = [2, 4, 1, 8, 5, 0, 3, 4, 5, 6, 7, 2, 1, 6]
-    # QSortRecThreeWayPartition.sort(a)
-    # print(a)
+    a = [2, 4, 1, 8, 5, 0, 3, 4, 5, 6, 7, 2, 1, 6]
+    QSortRecThreeWayPartitionAlternative.sort(a)
+    print(a)
 
-    # a = [2, 4, 1, 8, 5, 0, 3, 4, 5, 6, 7, 2, 1, 6]
-    # QSortRecThreeWayPartitionAlternative.sort(a)
-    # print(a)
-
-    # a =[2,4,1,8,5,0,]
-    # QSortRecThreeWayPartitionAlternative.sort(a)
-    # print(a)
+    a = [2, 4, 1, 8, 5, 0, ]
+    QSortRecThreeWayPartitionAlternative.sort(a)
+    print(a)
 
     a = [2, 4, 1, 8, 5, 0, 3, 4, 5, 6, 7, 2, 1, 6]
     QSortRec.sort(a)
