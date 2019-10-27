@@ -21,7 +21,7 @@ where the code base is located.
             "request": "launch",
             "program": "${file}",
             "env": {
-                "PYTHONPATH": "/path/to/algorithm-challenges-lab/python/src:/path/to/algorithm-challenges-lab/python/resources"
+                "PYTHONPATH": "/path/to/algorithms-challenges-lab-python/src:/path/to/algorithms-challenges-lab-python/resources"
             },
             "console": "integratedTerminal"
         }
@@ -34,7 +34,7 @@ Alternativelly, you can set the path inside the running script. For example:
 ```python
 if __name__ == "__main__":
     import sys; print('Python %s on %s' % (sys.version, sys.platform))
-    sys.path.extend(['/path/to/algorithm-challenges-lab'])
+    sys.path.extend(['/path/to/algorithms-challenges-lab'])
     // ...
 ```
 
